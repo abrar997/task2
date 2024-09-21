@@ -7,7 +7,7 @@ let interval;
 
 function showSlides() {
   items.forEach((item, i) => {
-    item.style.opacity = i === index ? "1" : "0.1";
+    item.style.opacity = i === index ? "1" : "0";
     item.style.transform =
       i === index ? "translateX(0)" : `translateX(${item.offsetWidth}px)`;
   });
