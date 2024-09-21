@@ -7,7 +7,7 @@ let interval;
 
 function showSlides() {
   items.forEach((item, i) => {
-    item.style.opacity = i === index ? "1" : "0";
+    item.style.opacity = i === index ? "1" : "0.1";
     item.style.transform =
       i === index ? "translateX(0)" : `translateX(${item.offsetWidth}px)`;
   });
@@ -32,7 +32,7 @@ function prevSlide() {
 }
 
 function startInterval() {
-  interval = setInterval(nextSlide, 3000);
+  interval = setInterval(nextSlide, 4000);
 }
 function stopInterval() {
   clearInterval(interval);
