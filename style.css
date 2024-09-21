@@ -1,13 +1,12 @@
 :root {
-  --body-background: #dfe0e0;
-  --main-color: rgb(9, 19, 27);
+  --body-background: #f0f6f6;
+  --main-color: rgb(7, 78, 136);
   --text-color: rgb(61, 61, 61);
 }
 
 * {
   padding: 0px;
   margin: 0px;
-  box-sizing: border-box;
 }
 
 body {
@@ -17,40 +16,43 @@ body {
 
 .slider {
   padding: 40px;
-  width: 800px;
+  width: 60%;
   margin: auto;
   margin-top: 60px;
-  box-shadow: 20px 20px 60px #afb3bd, -20px -20px 60px #cdcece;
-  background: linear-gradient(185deg, #dcdcde, #e4e8f1);
   border-radius: 20px;
   display: grid;
+  box-shadow: 20px 20px 60px #afb3bd, -20px -20px 60px #cdcece;
+  background: linear-gradient(185deg, #dcdcde, #e4e8f1);
+  min-height: 500px;
+  overflow: hidden;
 }
+
 .slider .slider-content {
   position: relative;
+  height: 100%;
 }
 
 .slider .slider-list {
   position: relative;
-  overflow: hidden;
-  height: 350px;
+  height: 100%;
+  /* overflow: hidden; */
 }
 
 .slider .slider-list .item {
   position: absolute;
-  inset: 0;
   width: 100%;
   transition: transform 0.5s ease-in-out;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 12px;
   align-items: start;
-  background: linear-gradient(185deg, #dcdcde, #e4e8f1);
   opacity: 0;
 }
 .slider .slider-list .item .item-content {
-  grid-column: span;
+  grid-column: span 1;
   display: flex;
   flex-direction: column;
+  align-items: start;
   gap: 10px;
   padding-top: 50px;
 }
@@ -67,24 +69,24 @@ body {
   border-radius: 10px;
   opacity: 1;
   grid-column: span 1;
-  min-height: 350px;
-  filter: brightness(0.8);
+  height: fit-content;
+  min-height: 500px;
 }
 
 .slider .slider-control {
   position: absolute;
   display: grid;
-  /* justify-content: space-between; */
+  justify-content: space-between;
   height: 100%;
   left: 0;
-  top: 0;
-  bottom: 20px;
+  top: 10px;
+  bottom: 40px;
 }
 .slider .slider-navigation {
   display: flex;
   align-items: center;
   gap: 14px;
-  margin-top: auto;
+  margin-top: 140px;
 }
 
 .slider .slider-navigation .prev-btn,
@@ -103,6 +105,11 @@ body {
   font-weight: 600;
   box-shadow: inset 6px 6px 12px #bec1cc, inset -6px -6px 12px #dee3f0;
   background: #ced2de;
+}
+.slider .slider-navigation .prev-btn:hover,
+.next-btn:hover {
+  background-color: #afb3bd;
+  transition: all 0.3s ease-in-out;
 }
 .slider .slider-pagination {
   display: flex;
@@ -123,4 +130,16 @@ body {
   cursor: not-allowed;
   background-color: gray;
   color: gray;
+}
+
+@media screen and (max-width: 520px) {
+  .slider {
+    margin: 0;
+    width: 100%;
+    padding: 20px;
+  }
+  .slider .slider-list .item {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
 }
