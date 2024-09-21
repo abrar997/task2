@@ -45,6 +45,7 @@ body {
   gap: 12px;
   align-items: start;
   background: linear-gradient(185deg, #dcdcde, #e4e8f1);
+  opacity: 0;
 }
 .slider .slider-list .item .item-content {
   grid-column: span;

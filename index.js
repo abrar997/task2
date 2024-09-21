@@ -9,7 +9,7 @@ function showSlides() {
   items.forEach((item, i) => {
     item.style.opacity = i === index ? "1" : "0";
     item.style.transform =
-      i === index ? "translateX(0)" : `translateX(${item.offsetWidth}px)`;
+      i === index ? "translateX(0)" : `translateX(${100}%)`;
   });
   items[index].classList.add("active");
   pagination.forEach((item, i) => {
