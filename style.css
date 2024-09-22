@@ -1,6 +1,6 @@
 :root {
-  --body-background: #f0f6f6;
-  --main-color: rgb(7, 78, 136);
+  --body-background: #f6f0f3;
+  --main-color: rgb(182, 18, 124);
   --text-color: rgb(61, 61, 61);
 }
 
@@ -12,6 +12,7 @@
 body {
   background-color: var(--body-background);
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  overflow: hidden;
 }
 
 .slider {
@@ -20,81 +21,78 @@ body {
   margin: auto;
   margin-top: 60px;
   border-radius: 20px;
-  display: grid;
   box-shadow: 20px 20px 60px #afb3bd, -20px -20px 60px #cdcece;
   background: linear-gradient(185deg, #dcdcde, #e4e8f1);
-  min-height: 500px;
-  overflow: hidden;
-}
-
-.slider .slider-content {
+  min-height: 450px;
+  display: grid;
   position: relative;
-  height: 100%;
+  overflow: hidden;
 }
 
 .slider .slider-list {
   position: relative;
   height: 100%;
-  /* overflow: hidden; */
 }
 
 .slider .slider-list .item {
-  position: absolute;
-  width: 100%;
-  transition: transform 0.5s ease-in-out;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-  align-items: start;
+  min-width: 100%;
   opacity: 0;
-}
-.slider .slider-list .item .item-content {
-  grid-column: span 1;
+  transform: translateX(100%);
+  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+  position: absolute;
+  top: 0;
+  left: 0;
   display: flex;
-  flex-direction: column;
-  align-items: start;
-  gap: 10px;
-  padding-top: 50px;
+  justify-content: center;
+  align-items: center;
 }
-.slider .slider-list .item .item-content h1 {
-  color: var(--main-color);
+
+.slider .slider-list .item.active {
+  opacity: 1;
+  transform: translateX(0);
 }
-.slider .slider-list .item .item-content p {
-  color: var(--text-color);
+
+.slider .slider-list .item.previous {
+  transform: translateX(-100%);
+}
+
+.slider .slider-list .item.next {
+  transform: translateX(100%);
 }
 
 .slider .slider-list .item img {
-  height: 100%;
+  height: fit-content;
+  height: 450px;
   width: 100%;
   border-radius: 10px;
   opacity: 1;
-  grid-column: span 1;
-  height: fit-content;
-  min-height: 500px;
+  object-fit: cover;
 }
 
 .slider .slider-control {
-  position: absolute;
-  display: grid;
+  display: flex;
   justify-content: space-between;
+  width: 100%;
+  margin-top: 20px;
+  position: absolute;
+  z-index: 2;
+  width: 100%;
   height: 100%;
-  left: 0;
-  top: 10px;
-  bottom: 40px;
 }
+
 .slider .slider-navigation {
   display: flex;
   align-items: center;
   gap: 14px;
-  margin-top: 140px;
+  justify-content: space-between;
 }
 
 .slider .slider-navigation .prev-btn,
 .next-btn {
   color: var(--main-color);
   border: none;
-  height: 35px;
-  width: 35px;
+  height: 45px;
+  width: 45px;
   border-radius: 30px;
   cursor: pointer;
   font-size: 26px;
@@ -106,15 +104,36 @@ body {
   box-shadow: inset 6px 6px 12px #bec1cc, inset -6px -6px 12px #dee3f0;
   background: #ced2de;
 }
+
+.slider .slider-navigation .next-btn {
+  position: absolute;
+  right: 10px;
+  z-index: 3;
+}
+
+.slider .slider-navigation .prev-btn {
+  position: absolute;
+  left: 10px;
+}
+
 .slider .slider-navigation .prev-btn:hover,
 .next-btn:hover {
   background-color: #afb3bd;
   transition: all 0.3s ease-in-out;
 }
+
 .slider .slider-pagination {
   display: flex;
-  gap: 4px;
+  gap: 8px;
+  justify-content: center;
+  position: absolute;
+  bottom: 80px;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  width: 100%;
 }
+
 .slider .slider-pagination .dot {
   width: 10px;
   height: 10px;
@@ -122,24 +141,50 @@ body {
   background: #bbbfca;
   cursor: pointer;
 }
+
 .slider .slider-pagination .dot.active {
   background-color: var(--main-color);
 }
 
-.prev-btn.disabled {
-  cursor: not-allowed;
-  background-color: gray;
-  color: gray;
-}
-
 @media screen and (max-width: 520px) {
   .slider {
+    padding: 10px;
     margin: 0;
     width: 100%;
-    padding: 20px;
+    border-radius: none;
   }
-  .slider .slider-list .item {
-    display: grid;
-    grid-template-columns: 1fr;
+
+  .slider .slider-navigation .prev-btn {
+    left: 2px;
+  }
+  .slider .slider-navigation .next-btn {
+    right: 2px;
+  }
+  .slider .slider-pagination {
+    bottom: 50px;
+  }
+}
+@media screen and (max-width: 920px) {
+  .slider {
+    padding: 0px;
+    margin: 10;
+    width: 100%;
+  }
+  .slider .item {
+    width: 100%;
+  }
+  .slider .item img {
+    height: 400px;
+    width: 100%;
+  }
+
+  .slider .slider-navigation .prev-btn {
+    left: 2px;
+  }
+  .slider .slider-navigation .next-btn {
+    right: 2px;
+  }
+  .slider .slider-pagination {
+    bottom: 50px;
   }
 }

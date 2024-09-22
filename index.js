@@ -7,11 +7,17 @@ let interval;
 
 function showSlides() {
   items.forEach((item, i) => {
-    item.style.opacity = i === index ? "1" : "0";
-    item.style.transform =
-      i === index ? "translateX(0)" : `translateX(${100}%)`;
+    item.classList.remove("active", "previous", "next");
+    if (i === index) {
+      item.classList.add("active");
+    } else if (i > index) {
+      item.classList.add("next");
+    } else {
+      item.classList.add("previous");
+    }
   });
-  items[index].classList.add("active");
+
+  // items[index].classList.add("active");
   pagination.forEach((item, i) => {
     item.classList.toggle("active", i === index);
   });
@@ -65,5 +71,5 @@ items.forEach((item) => {
   item.addEventListener("mouseleave", startInterval);
 });
 
-showSlides();
+showSlides(index);
 startInterval();
