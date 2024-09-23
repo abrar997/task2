@@ -1,6 +1,6 @@
 var items = document.querySelectorAll(".item");
-var nextBtn = document.getElementById("btn-next");
-var prevBtn = document.getElementById("btn-prev");
+var nextBtn = document.querySelector(".next-btn");
+var prevBtn = document.querySelector(".prev-btn");
 var pagination = document.querySelectorAll(".dot");
 let index = 0;
 let interval;
@@ -25,8 +25,8 @@ function showSlides() {
 }
 
 function updateIndex(newIndex) {
-  index = (newIndex + items.length) % items.length;
   stopInterval();
+  index = (newIndex + items.length) % items.length;
   showSlides();
 }
 
@@ -39,7 +39,7 @@ function prevSlide() {
 }
 
 function startInterval() {
-  interval = setInterval(nextSlide, 4000);
+  interval = setInterval(nextSlide, 3500);
 }
 function stopInterval() {
   clearInterval(interval);
@@ -67,7 +67,10 @@ prevBtn.addEventListener("click", () => {
 });
 
 items.forEach((item) => {
-  item.addEventListener("mouseenter", stopInterval);
+  item.addEventListener("mouseenter", function () {
+    console.log("touched");
+    stopInterval();
+  });
   item.addEventListener("mouseleave", startInterval);
 });
 
