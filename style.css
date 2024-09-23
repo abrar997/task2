@@ -49,6 +49,7 @@ body {
   left: 0;
   inset: 0;
   transform: perspective(1200px) translateX(100%) rotateY(190deg);
+  cursor: grab;
 }
 
 .slider .slider-list .item.active {
@@ -184,9 +185,12 @@ body {
     left: 0;
     right: 0;
   }
+  .slider .slider-list .item .item-text h2 {
+    font-size: 16px;
+  }
   .slider .slider-list .item .item-text h1 {
     font-size: 26px;
-    gap: 4px;
+    gap: 6px;
   }
   .slider .slider-list .item .item-text p {
     font-size: 14px;
