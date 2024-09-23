@@ -1,6 +1,6 @@
 :root {
-  --body-background: #f6f0f3;
-  --main-color: rgb(182, 18, 124);
+  --body-background: #fff8fb;
+  --main-color: rgb(223, 57, 112);
   --text-color: rgb(61, 61, 61);
 }
 
@@ -32,10 +32,11 @@ body {
 .slider .slider-list {
   position: relative;
   height: 100%;
+  display: flex;
 }
 
 .slider .slider-list .item {
-  min-width: 100%;
+  width: 100%;
   opacity: 0;
   transform: translateX(100%);
   transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
@@ -45,30 +46,29 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  transform: perspective(1200px) translateX(100%) rotateY(190deg);
 }
 
 .slider .slider-list .item.active {
   opacity: 1;
-  transform: translateX(0);
+  transform: perspective(1200px) translateX(0) rotateY(0);
 }
-
-.slider .slider-list .item.previous {
-  transform: translateX(-100%);
-}
-
 .slider .slider-list .item.next {
-  transform: translateX(100%);
+  opacity: 0;
+  transform: perspective(1200px) translateX(100%) rotateY(190deg);
+}
+.slider .slider-list .item.previous {
+  opacity: 0;
+  transform: perspective(1200px) translateX(-100%) rotateY(-190deg);
 }
 
 .slider .slider-list .item img {
   height: fit-content;
-  height: 450px;
+  max-height: 450px;
   width: 100%;
   border-radius: 10px;
-  opacity: 1;
-  object-fit: cover;
+  filter: grayscale(1);
 }
-
 .slider .slider-control {
   display: flex;
   justify-content: space-between;
@@ -146,14 +146,19 @@ body {
   background-color: var(--main-color);
 }
 
-@media screen and (max-width: 520px) {
+@media screen and (min-width: 300px) and (max-width: 520px) {
   .slider {
     padding: 10px;
     margin: 0;
     width: 100%;
     border-radius: none;
+    min-height: 305px;
+    box-shadow: none;
+    background: transparent;
   }
-
+  .slider .slider-list .item img {
+    height: 300px;
+  }
   .slider .slider-navigation .prev-btn {
     left: 2px;
   }
@@ -164,17 +169,19 @@ body {
     bottom: 50px;
   }
 }
-@media screen and (max-width: 920px) {
+@media screen and (min-width: 521px) and (max-width: 920px) {
   .slider {
     padding: 0px;
-    margin: 10;
+    margin: 0px;
     width: 100%;
+    box-shadow: none;
+    background: transparent;
   }
   .slider .item {
     width: 100%;
   }
-  .slider .item img {
-    height: 400px;
+  .slider .slider-list .item img {
+    height: 390px;
     width: 100%;
   }
 

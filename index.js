@@ -12,20 +12,23 @@ function showSlides() {
       item.classList.add("active");
     } else if (i > index) {
       item.classList.add("next");
-    } else {
+    } else if (i === (index - 1 + items.length) % items.length) {
       item.classList.add("previous");
+    } else {
+      item.classList.add("next");
     }
   });
 
-  // items[index].classList.add("active");
   pagination.forEach((item, i) => {
     item.classList.toggle("active", i === index);
   });
 }
 
 function updateIndex(newIndex) {
+  stopInterval();
   index = (newIndex + items.length) % items.length;
   showSlides();
+  startInterval();
 }
 
 function nextSlide() {
@@ -34,7 +37,6 @@ function nextSlide() {
 
 function prevSlide() {
   updateIndex(index - 1);
-  showSlides();
 }
 
 function startInterval() {
@@ -50,7 +52,6 @@ pagination.forEach((item, i) => {
     showSlides();
     stopInterval();
     startInterval();
-    console.log("clicked");
   });
 });
 
