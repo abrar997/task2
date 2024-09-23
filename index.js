@@ -69,16 +69,48 @@ function stopInterval() {
   clearInterval(interval);
 }
 
-// move when drag
+// swipe when drag for desktop and mobile
 items.forEach((item) => {
-  item.addEventListener("mousedown", function (e) {
+  const handleMove = (e) => {
+    currentX = e.clientX || e.touches[0].clientX;
+  };
+
+  item.addEventListener("pointerdown", function (e) {
     isDragging = true;
     startX = e.clientX;
-    item.addEventListener("mousemove", function (move) {
+
+    const onPointerMove = (move) => {
       if (!isDragging) return;
-      currentX = move.clientX;
-    });
-    item.addEventListener("mouseup", function () {
+      handleMove(move);
+    };
+
+    const onPointerUp = () => {
+      if (isDragging) {
+        isDragging = false;
+        if (startX - currentX > 50) {
+          nextSlide();
+        } else if (currentX - startX > 50) {
+          prevSlide();
+        }
+        isDragging = false;
+        item.removeEventListener("pointermove", onPointerMove);
+        item.removeEventListener("pointerup", onPointerUp);
+      }
+    };
+    item.addEventListener("pointermove", onPointerMove);
+    item.addEventListener("pointerup", onPointerUp);
+    item.addEventListener("pointerleave", onPointerUp);
+  });
+  // for mobile
+  item.addEventListener("touchstart", function (e) {
+    isDragging = true;
+    startX = e.touches[0].clientX;
+
+    const OnTouchMove = (move) => {
+      if ((isDragging = false)) return;
+      handleMove(move);
+    };
+    const onTouchEnd = () => {
       if (isDragging) {
         if (startX - currentX > 50) {
           nextSlide();
@@ -86,11 +118,12 @@ items.forEach((item) => {
           prevSlide();
         }
         isDragging = false;
+        item.removeEventListener("touchmove", OnTouchMove);
+        item.removeEventListener("touchend", onTouchEnd);
       }
-    });
-    item.addEventListener("mouseleave", function () {
-      isDragging = false;
-    });
+    };
+    item.addEventListener("touchmove", OnTouchMove);
+    item.addEventListener("touchend", onTouchEnd);
   });
 });
 

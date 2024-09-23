@@ -49,6 +49,9 @@ body {
   left: 0;
   inset: 0;
   transform: perspective(1200px) translateX(100%) rotateY(190deg);
+}
+.slider .slider-list .item:hover,
+.slider .slider-list .item:focus {
   cursor: grab;
 }
 
