@@ -25,10 +25,9 @@ function showSlides() {
 }
 
 function updateIndex(newIndex) {
-  stopInterval();
   index = (newIndex + items.length) % items.length;
+  stopInterval();
   showSlides();
-  startInterval();
 }
 
 function nextSlide() {
